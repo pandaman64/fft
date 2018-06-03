@@ -1,0 +1,8 @@
+[package]
+name = "fft"
+version = "0.1.0"
+authors = ["pandaman64 <kointosudesuyo@infoseek.jp>"]
+
+[dependencies]
+num-complex = { version = "0.2", features = [ "std", "rand" ] }
+rand = "0.5.0"

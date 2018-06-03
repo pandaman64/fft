@@ -1,0 +1,28 @@
+
+running 23 tests
+test test_precision ... ignored
+test bench_dft1  ... bench:         158 ns/iter (+/- 14)
+test bench_dft10 ... bench:  40,774,923 ns/iter (+/- 1,403,295)
+test bench_dft11 ... bench: 166,462,642 ns/iter (+/- 6,152,817)
+test bench_dft2  ... bench:         673 ns/iter (+/- 66)
+test bench_dft3  ... bench:       2,889 ns/iter (+/- 226)
+test bench_dft4  ... bench:      10,435 ns/iter (+/- 267)
+test bench_dft5  ... bench:      41,262 ns/iter (+/- 2,787)
+test bench_dft6  ... bench:     168,052 ns/iter (+/- 5,584)
+test bench_dft7  ... bench:     668,279 ns/iter (+/- 34,770)
+test bench_dft8  ... bench:   2,683,292 ns/iter (+/- 118,192)
+test bench_dft9  ... bench:  10,676,546 ns/iter (+/- 236,442)
+test bench_fft1  ... bench:         184 ns/iter (+/- 6)
+test bench_fft10 ... bench:     520,105 ns/iter (+/- 20,232)
+test bench_fft11 ... bench:   1,148,503 ns/iter (+/- 19,357)
+test bench_fft2  ... bench:         615 ns/iter (+/- 14)
+test bench_fft3  ... bench:       1,656 ns/iter (+/- 69)
+test bench_fft4  ... bench:       4,035 ns/iter (+/- 190)
+test bench_fft5  ... bench:       9,500 ns/iter (+/- 425)
+test bench_fft6  ... bench:      21,890 ns/iter (+/- 662)
+test bench_fft7  ... bench:      49,328 ns/iter (+/- 3,398)
+test bench_fft8  ... bench:     109,205 ns/iter (+/- 3,440)
+test bench_fft9  ... bench:     240,169 ns/iter (+/- 7,704)
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 22 measured; 0 filtered out
+
