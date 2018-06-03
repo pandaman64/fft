@@ -1,0 +1,16 @@
+
+running 11 tests
+test bench_fft1  ... bench:         122 ns/iter (+/- 4)
+test bench_fft10 ... bench:     429,409 ns/iter (+/- 15,533)
+test bench_fft11 ... bench:     935,575 ns/iter (+/- 31,783)
+test bench_fft2  ... bench:         426 ns/iter (+/- 42)
+test bench_fft3  ... bench:       1,197 ns/iter (+/- 61)
+test bench_fft4  ... bench:       3,075 ns/iter (+/- 403)
+test bench_fft5  ... bench:       7,366 ns/iter (+/- 297)
+test bench_fft6  ... bench:      17,345 ns/iter (+/- 1,943)
+test bench_fft7  ... bench:      39,485 ns/iter (+/- 1,819)
+test bench_fft8  ... bench:      89,624 ns/iter (+/- 3,251)
+test bench_fft9  ... bench:     197,767 ns/iter (+/- 18,542)
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 11 measured; 12 filtered out
+

@@ -67,19 +67,48 @@ fn fft(input: &[Complex32], initial: bool) -> Vec<Complex32> {
     ret
 }
 
-/*
-fn print_seq<T: std::fmt::Display>(input: &[T]) {
+fn fft_stride(input: &[Complex32], start: usize, stride: usize, output: &mut [Complex32]) {
+    let n = input.len();
+    let m = output.len();
+    assert_eq!(n, m * stride);
+
+    if n == stride {
+        output[0] = input[start];
+        return;
+    }
+
+    let omega = Complex32::new(0.0, 2.0 * PI / (m as f32)).exp();
+
+    {
+        let (even, odd) = output.split_at_mut(m / 2);
+        fft_stride(input, start, stride * 2, even);
+        fft_stride(input, start + stride, stride * 2, odd);
+
+        for j in 0..(m / 2) {
+            let tmp = odd[j];
+            odd[j] = even[j] + omega.powf((m / 2 + j) as f32) * tmp;
+            even[j] = even[j] + omega.powf(j as f32) * tmp;
+        }
+    }
+
+    if stride == 1 {
+        for x in output.iter_mut() {
+            *x /= (n as f32).sqrt();
+        }
+    }
+}
+
+fn print_seq<T: std::fmt::Display>(input: &[T], start: usize, stride: usize) {
     if input.len() == 0 {
         println!("[]");
     } else {
-        print!("[{:.4}", input[0]);
-        for j in 1..input.len() {
-            print!(" {:.4}", input[j]);
+        print!("[{:.4}", input[start]);
+        for j in 1..(input.len() / stride) {
+            print!(" {:.4}", input[start + j * stride]);
         }
         println!("]");
     }
 }
-*/
 
 fn distance(lhs: &[Complex32], rhs: &[Complex32]) -> f32 {
     let mut ret = 0.0;
@@ -98,7 +127,9 @@ fn random_test(bit_len: usize, count: usize, tolerance: f32) {
         let input = iter.by_ref().take(n).collect::<Vec<_>>();
 
         let dft = dft(&input);
-        let fft = fft(&input, true);
+        //let fft = fft(&input, true);
+        let mut fft = vec![Complex32::new(0.0, 0.0); n];
+        fft_stride(&input, 0, 1, &mut fft);
 
         assert!(distance(&dft, &fft) < tolerance);
     }
@@ -133,11 +164,22 @@ fn run_dft(b: &mut Bencher, bit_len: usize) {
     })
 }
 
+/*
 fn run_fft(b: &mut Bencher, bit_len: usize) {
     let input = random_input(bit_len);
     b.iter(|| {
         let input = test::black_box(&input);        
         fft(input, true);
+    })
+}
+*/
+
+fn run_fft(b: &mut Bencher, bit_len: usize) {
+    let input = random_input(bit_len);
+    b.iter(|| {
+        let input = test::black_box(&input);        
+        let mut output = vec![Complex32::new(0.0, 0.0); input.len()];
+        fft_stride(input, 0, 1, &mut output);
     })
 }
 
@@ -273,4 +315,9 @@ fn bench_fft16(b: &mut Bencher) {
 */
 
 fn main() {
+    let input = (0..8).map(|x| Complex32::new(x as f32, 0.0)).collect::<Vec<_>>();
+    print_seq(&dft(&input), 0, 1);
+    let mut fft = vec![ 0.0.into(); 8 ];
+    fft_stride(&input, 0, 1, &mut fft);
+    print_seq(&fft, 0, 1);
 }
